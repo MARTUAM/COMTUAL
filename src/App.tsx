@@ -3,7 +3,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { 
   X, ArrowRight, 
   Shield, 
-  Globe, Twitter, Linkedin,
+  Globe,
   FileCheck, Landmark, Building2, CreditCard, FileText, Clock, Scale, Users, ShieldCheck, ChevronDown, ArrowLeft
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
@@ -508,7 +508,7 @@ const ModeloDeNegocio = () => {
               <div className="w-14 h-14 rounded-2xl bg-[#8a2be2]/10 flex items-center justify-center text-[#8a2be2] mb-6 shadow-[inset_0_0_15px_rgba(138,43,226,0.2)] group-hover:scale-110 transition-transform duration-500">
                 {punto.icon}
               </div>
-              <h4 className="text-white font-bold text-lg mb-3 relative z-10">{punto.title}</h4>
+              <h4 className="text-white font-normal text-lg mb-3 relative z-10">{punto.title}</h4>
               <p className="text-white/60 text-sm leading-relaxed relative z-10">{punto.desc}</p>
             </motion.div>
           ))}
@@ -541,6 +541,7 @@ const Contacto = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -606,7 +607,8 @@ const Contacto = () => {
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
           body: JSON.stringify({
             name: formData.nombre,
@@ -617,9 +619,14 @@ const Contacto = () => {
         });
 
         if (response.ok) {
-          alert(t.contacto.form.success);
+          setShowSuccessModal(true);
           setFormData({ nombre: '', empresa: '', correo: '', mensaje: '' });
           setTouched({ nombre: false, correo: false, mensaje: false });
+          
+          // Auto-hide modal after 5 seconds
+          setTimeout(() => {
+            setShowSuccessModal(false);
+          }, 5000);
         } else {
           alert('Hubo un error al enviar el mensaje. Por favor, verifica tu configuración de Formspree.');
         }
@@ -708,6 +715,43 @@ const Contacto = () => {
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-[#0a1526] border border-white/10 rounded-3xl p-8 md:p-12 max-w-md w-full text-center shadow-[0_0_50px_rgba(0,240,255,0.2)] relative"
+            >
+              <div className="w-20 h-20 mx-auto bg-[#00f0ff]/10 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-10 h-10 text-[#00f0ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">¡Mensaje Enviado!</h3>
+              <p className="text-white/60 mb-2">
+                {t.contacto.form.success}
+              </p>
+              <p className="text-white/40 text-sm mb-8">
+                Esta ventana se cerrará automáticamente en 5 segundos.
+              </p>
+              <button 
+                onClick={() => setShowSuccessModal(false)}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00f0ff] to-[#00b8ff] text-black font-bold tracking-widest uppercase text-sm transition-opacity hover:opacity-90"
+              >
+                Cerrar
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
@@ -743,10 +787,6 @@ const Footer = () => {
         </div>
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/40 text-xs">© {new Date().getFullYear()} COMTUAL. {t.footer.rights}</p>
-          <div className="flex gap-4">
-            <a href="#" className="text-white/40 hover:text-[#00f0ff] transition-colors"><Linkedin className="w-5 h-5" /></a>
-            <a href="#" className="text-white/40 hover:text-[#00f0ff] transition-colors"><Twitter className="w-5 h-5" /></a>
-          </div>
         </div>
       </div>
     </footer>

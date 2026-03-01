@@ -74,7 +74,7 @@ const translations = {
       ]
     },
     servicios: {
-      badge: "WHY CHOOSE US",
+      badge: "POR QUÉ ELEGIRNOS",
       title1: "Soluciones",
       title2: "Estratégicas",
       items: [
