@@ -16,7 +16,7 @@ const translations = {
       title2: "Jurídico-Operativa",
       title3: "México–Estados Unidos",
       description: "Operación, gestión y respaldo estructurado para despachos, empresas y procesos binacionales.",
-      badges: ['No gestoría', 'No despacho tradicional', 'No intermediario informal'],
+      badges: [],
       progress: {
         step1: "Estructura Formal",
         step2: "Control Operativo",
@@ -202,7 +202,7 @@ const translations = {
       title2: "Legal-Operational",
       title3: "Mexico–United States",
       description: "Operation, management, and structured support for law firms, companies, and binational processes.",
-      badges: ['Not an agency', 'Not a traditional law firm', 'Not an informal intermediary'],
+      badges: [],
       progress: {
         step1: "Formal Structure",
         step2: "Operational Control",

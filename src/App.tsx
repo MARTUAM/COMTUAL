@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { 
   X, ArrowRight, 
   Shield, 
   Globe, Twitter, Linkedin,
-  FileCheck, Landmark, Building2, CreditCard, FileText, Clock, Scale, Users, ShieldCheck, ChevronDown
+  FileCheck, Landmark, Building2, CreditCard, FileText, Clock, Scale, Users, ShieldCheck, ChevronDown, ArrowLeft
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { useLanguage } from './i18n';
@@ -45,14 +46,14 @@ const Navbar = ({ onOpenPortal }: { onOpenPortal: () => void }) => {
     <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#040b14]/95 border-b border-[#00f0ff]/20 py-4 shadow-[0_4px_30px_rgba(0,240,255,0.05)]' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
         <div className="flex items-center gap-4 cursor-pointer group">
-          <span className="font-serif text-2xl md:text-3xl font-bold tracking-widest text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">COMTUAL</span>
+          <Link to="/" className="font-serif text-2xl md:text-3xl font-bold tracking-widest text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">COMTUAL</Link>
         </div>
         
         <div className="hidden lg:flex items-center justify-center gap-8 absolute left-1/2 -translate-x-1/2">
-           <a href="#inicio" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.inicio}</a>
-           <a href="#representacion" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.representacion}</a>
-           <a href="#servicios" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.servicios}</a>
-           <a href="#contacto" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.contacto}</a>
+           <a href="/#inicio" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.inicio}</a>
+           <a href="/#representacion" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.representacion}</a>
+           <a href="/#servicios" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.servicios}</a>
+           <a href="/#contacto" className="text-xs font-bold tracking-widest text-white/70 hover:text-[#00f0ff] transition-colors uppercase">{t.nav.contacto}</a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -198,79 +199,83 @@ const Hero = () => {
 const RepresentacionBinacional = () => {
   const { t } = useLanguage();
   return (
-    <section id="representacion" className="py-32 px-6 min-h-screen flex items-center relative z-10 bg-[#020610] border-t border-white/5">
+    <section id="representacion" className="py-24 px-6 relative z-10 bg-[#020610] border-t border-white/5">
       <div className="max-w-7xl mx-auto w-full">
-        {/* Header Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          <div className="lg:col-span-8">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="font-mono text-xs text-[#00f0ff] tracking-widest uppercase">{t.representacion.badge}</span>
-              <div className="h-[1px] w-12 bg-white/20"></div>
-            </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-[1.1] tracking-tight">
-              {t.representacion.title1} <br />
-              <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">{t.representacion.title2}</span>
-            </h2>
-          </div>
-          <div className="lg:col-span-4 flex flex-col justify-end">
-            <p className="text-white/60 text-lg leading-relaxed font-light border-l border-[#00f0ff]/30 pl-6">
-              {t.representacion.description}
-            </p>
-          </div>
-        </div>
-
-        {/* Bento Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Main Feature Card */}
-          <div className="md:col-span-2 bg-[#060d1a] border border-white/5 rounded-3xl p-8 md:p-12 relative overflow-hidden group hover:border-white/10 transition-colors duration-500">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#00f0ff]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#00f0ff]/10 transition-colors duration-700"></div>
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div className="mb-12">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/5 border border-white/10 mb-8">
-                  <Shield className="w-6 h-6 text-[#00f0ff]" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-medium text-white mb-4">{t.representacion.cards.main.title}</h3>
-                <p className="text-white/60 leading-relaxed max-w-xl text-lg font-light">
-                  {t.representacion.cards.main.description}
-                </p>
+        <div className="bg-gradient-to-br from-[#060d1a] to-[#040b14] border border-white/5 rounded-[2rem] p-8 md:p-16 relative overflow-hidden group hover:border-white/10 transition-colors duration-500 shadow-2xl">
+          {/* Background Glows */}
+          <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-[#00f0ff]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover:bg-[#00f0ff]/10 transition-colors duration-700"></div>
+          <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] bg-[#8a2be2]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 group-hover:bg-[#8a2be2]/10 transition-colors duration-700"></div>
+          
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            {/* Left Column: Text Content */}
+            <div>
+              <div className="flex items-center gap-4 mb-8">
+                <span className="font-mono text-xs text-[#00f0ff] tracking-widest uppercase">{t.representacion.badge}</span>
+                <div className="h-[1px] w-12 bg-gradient-to-r from-[#00f0ff]/50 to-transparent"></div>
               </div>
               
-              <div className="flex items-center gap-8 pt-8 border-t border-white/5">
-                <div className="flex flex-col">
-                  <span className="font-mono text-3xl md:text-4xl text-white mb-1">100%</span>
-                  <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold">{t.representacion.cards.main.stat1}</span>
-                </div>
-                <div className="w-[1px] h-12 bg-white/10"></div>
-                <div className="flex flex-col">
-                  <span className="font-mono text-3xl md:text-4xl text-white mb-1">0</span>
-                  <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold">{t.representacion.cards.main.stat2}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Secondary Feature Card */}
-          <div className="bg-gradient-to-br from-[#0a1526] to-[#040b14] border border-[#00f0ff]/20 rounded-3xl p-8 md:p-12 relative overflow-hidden flex flex-col justify-between group">
-            <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#00f0ff]/10 text-[#00f0ff] mb-8">
-                <Globe className="w-6 h-6" strokeWidth={1.5} />
-              </div>
-              <h3 className="text-xl font-medium text-white mb-4">{t.representacion.cards.secondary.title}</h3>
-              <p className="text-white/70 leading-relaxed font-light">
-                {t.representacion.cards.secondary.description}
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1] tracking-tight mb-6">
+                {t.representacion.title1} <br />
+                <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">{t.representacion.title2}</span>
+              </h2>
+              
+              <p className="text-white/60 text-lg leading-relaxed font-light mb-10">
+                {t.representacion.description}
               </p>
-            </div>
-            
-            <div className="relative z-10 mt-12">
-              <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-r from-[#00f0ff] to-[#8a2be2] origin-left scale-x-100"></div>
+
+              <div className="flex flex-wrap gap-4">
+                <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium flex items-center gap-3 backdrop-blur-sm">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"></div>
+                  {t.representacion.cards.secondary.tag1}
+                </div>
+                <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium flex items-center gap-3 backdrop-blur-sm">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#8a2be2] shadow-[0_0_8px_#8a2be2]"></div>
+                  {t.representacion.cards.secondary.tag2}
+                </div>
               </div>
-              <div className="flex justify-between mt-4 text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">
-                <span>{t.representacion.cards.secondary.tag1}</span>
-                <span>{t.representacion.cards.secondary.tag2}</span>
+            </div>
+
+            {/* Right Column: Stats & Differentiator */}
+            <div className="flex flex-col gap-6">
+              {/* Main Stat Card */}
+              <div className="bg-[#0a1526]/80 backdrop-blur-md border border-[#00f0ff]/20 rounded-3xl p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#00f0ff]/10 text-[#00f0ff]">
+                      <Shield className="w-5 h-5" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl font-medium text-white">{t.representacion.cards.main.title}</h3>
+                  </div>
+                  <p className="text-white/60 leading-relaxed text-sm font-light mb-8">
+                    {t.representacion.cards.main.description}
+                  </p>
+                  
+                  <div className="flex items-center gap-4 md:gap-8 pt-6 border-t border-white/10 flex-wrap">
+                    <div className="flex flex-col">
+                      <span className="font-mono text-3xl text-white mb-1">100%</span>
+                      <span className="text-[9px] md:text-[10px] text-white/40 uppercase tracking-wider md:tracking-widest font-semibold">{t.representacion.cards.main.stat1}</span>
+                    </div>
+                    <div className="w-[1px] h-10 bg-white/10 hidden sm:block"></div>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-3xl text-white mb-1">0</span>
+                      <span className="text-[9px] md:text-[10px] text-white/40 uppercase tracking-wider md:tracking-widest font-semibold">{t.representacion.cards.main.stat2}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Secondary Card */}
+              <div className="bg-[#0a1526]/50 backdrop-blur-md border border-white/5 rounded-3xl p-8 flex items-start gap-6">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 text-white/70 shrink-0 mt-1">
+                  <Globe className="w-5 h-5" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-white mb-2">{t.representacion.cards.secondary.title}</h3>
+                  <p className="text-white/50 leading-relaxed text-sm font-light">
+                    {t.representacion.cards.secondary.description}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -331,14 +336,14 @@ const EnfoqueCentral = () => {
           </h2>
         </div>
         
-        <div className="flex flex-col lg:flex-row gap-4 h-[800px] lg:h-[500px]">
+        <div className="flex flex-col lg:flex-row gap-3 h-[600px] lg:h-[400px]">
           {partners.map((partner, i) => {
             const isActive = hoveredIndex === i;
             return (
               <div 
                 key={i} 
                 onMouseEnter={() => setHoveredIndex(i)}
-                className={`group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col justify-end p-6 md:p-8
+                className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col justify-end p-5 md:p-6
                   ${isActive ? 'lg:flex-[3] flex-[2] border-[#00f0ff]/50 bg-[#0a1526] shadow-[0_0_30px_rgba(0,240,255,0.1)]' : 'lg:flex-[1] flex-[1] border-white/10 bg-[#040b14]/50 hover:bg-[#0a1526]/50'}
                   border
                 `}
@@ -354,7 +359,7 @@ const EnfoqueCentral = () => {
                   <div className="mt-auto flex flex-col justify-end">
                     <div className="overflow-hidden">
                       <h3 className={`font-bold text-white transition-all duration-500 flex items-center
-                        ${isActive ? 'text-xl md:text-2xl mb-3' : 'text-sm opacity-70 group-hover:opacity-100'}
+                        ${isActive ? 'text-lg md:text-xl mb-2' : 'text-xs opacity-70 group-hover:opacity-100'}
                       `}>
                         <span className={`block transition-all duration-500 ${!isActive ? 'lg:[writing-mode:vertical-rl] lg:rotate-180 whitespace-nowrap' : ''}`}>
                           {partner.title}
@@ -362,8 +367,8 @@ const EnfoqueCentral = () => {
                       </h3>
                     </div>
                     
-                    <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-white/70 text-sm md:text-base leading-relaxed">
+                    <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <p className="text-white/70 text-xs md:text-sm leading-relaxed">
                         {partner.desc}
                       </p>
                     </div>
@@ -486,7 +491,7 @@ const ModeloDeNegocio = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {puntos.map((punto, i) => (
             <motion.div 
               key={i} 
@@ -494,13 +499,17 @@ const ModeloDeNegocio = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-[#0a1526] border border-white/5 flex flex-col items-center text-center hover:border-[#8a2be2]/50 transition-colors shadow-lg"
+              className={`p-8 rounded-3xl bg-gradient-to-br from-[#0a1526] to-[#040b14] border border-white/5 flex flex-col items-start hover:border-[#8a2be2]/50 transition-all duration-500 group relative overflow-hidden shadow-xl
+                ${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}
+              `}
             >
-              <div className="w-14 h-14 rounded-full bg-[#8a2be2]/10 flex items-center justify-center text-[#8a2be2] mb-6 shadow-[inset_0_0_15px_rgba(138,43,226,0.2)]">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#8a2be2]/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#8a2be2]/10 transition-colors duration-500"></div>
+              
+              <div className="w-14 h-14 rounded-2xl bg-[#8a2be2]/10 flex items-center justify-center text-[#8a2be2] mb-6 shadow-[inset_0_0_15px_rgba(138,43,226,0.2)] group-hover:scale-110 transition-transform duration-500">
                 {punto.icon}
               </div>
-              <h4 className="text-white font-bold text-sm mb-3">{punto.title}</h4>
-              <p className="text-white/50 text-xs leading-relaxed">{punto.desc}</p>
+              <h4 className="text-white font-bold text-lg mb-3 relative z-10">{punto.title}</h4>
+              <p className="text-white/60 text-sm leading-relaxed relative z-10">{punto.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -593,7 +602,7 @@ const Contacto = () => {
     if (!hasErrors) {
       setIsSubmitting(true);
       try {
-        const formspreeId = import.meta.env.VITE_FORMSPREE_ID || 'TU_ID_AQUI';
+        const formspreeId = 'mlgwkjka';
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: 'POST',
           headers: {
@@ -710,7 +719,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <span className="font-serif text-3xl font-bold tracking-widest text-white mb-6 block">COMTUAL</span>
+            <Link to="/" className="font-serif text-3xl font-bold tracking-widest text-white mb-6 block">COMTUAL</Link>
             <p className="text-white/50 text-sm max-w-sm leading-relaxed">
               {t.footer.description}
             </p>
@@ -718,17 +727,17 @@ const Footer = () => {
           <div>
             <h4 className="text-[#00f0ff] font-bold mb-6 text-xs uppercase tracking-widest">{t.footer.nav.title}</h4>
             <ul className="space-y-4 text-sm text-white/60">
-              <li><a href="#inicio" className="hover:text-white transition-colors">{t.nav.inicio}</a></li>
-              <li><a href="#representacion" className="hover:text-white transition-colors">{t.nav.representacion}</a></li>
-              <li><a href="#servicios" className="hover:text-white transition-colors">{t.nav.servicios}</a></li>
-              <li><a href="#contacto" className="hover:text-white transition-colors">{t.nav.contacto}</a></li>
+              <li><a href="/#inicio" className="hover:text-white transition-colors">{t.nav.inicio}</a></li>
+              <li><a href="/#representacion" className="hover:text-white transition-colors">{t.nav.representacion}</a></li>
+              <li><a href="/#servicios" className="hover:text-white transition-colors">{t.nav.servicios}</a></li>
+              <li><a href="/#contacto" className="hover:text-white transition-colors">{t.nav.contacto}</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-[#00f0ff] font-bold mb-6 text-xs uppercase tracking-widest">{t.footer.legal.title}</h4>
             <ul className="space-y-4 text-sm text-white/60">
-              <li><a href="#" className="hover:text-white transition-colors">{t.footer.legal.privacy}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t.footer.legal.terms}</a></li>
+              <li><Link to="/privacy" className="hover:text-white transition-colors">{t.footer.legal.privacy}</Link></li>
+              <li><Link to="/terms" className="hover:text-white transition-colors">{t.footer.legal.terms}</Link></li>
             </ul>
           </div>
         </div>
@@ -952,6 +961,91 @@ const PortalModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void
   );
 };
 
+const PrivacyPolicy = () => {
+  const { t } = useLanguage();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen pt-32 pb-20 px-6 relative z-10">
+      <div className="max-w-4xl mx-auto">
+        <Link to="/" className="inline-flex items-center gap-2 text-[#00f0ff] hover:text-white transition-colors mb-12 text-sm font-bold tracking-widest uppercase">
+          <ArrowLeft className="w-4 h-4" /> Volver al Inicio
+        </Link>
+        
+        <div className="bg-gradient-to-br from-[#0a1526] to-[#040b14] border border-white/10 rounded-3xl p-8 md:p-16 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#00f0ff]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-8 relative z-10">{t.privacy.title}</h1>
+          
+          <div className="space-y-6 text-white/70 leading-relaxed font-light relative z-10">
+            <p>{t.privacy.content1}</p>
+            <p>{t.privacy.content2}</p>
+            {/* Add more paragraphs as needed */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TermsOfUse = () => {
+  const { t } = useLanguage();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen pt-32 pb-20 px-6 relative z-10">
+      <div className="max-w-4xl mx-auto">
+        <Link to="/" className="inline-flex items-center gap-2 text-[#8a2be2] hover:text-white transition-colors mb-12 text-sm font-bold tracking-widest uppercase">
+          <ArrowLeft className="w-4 h-4" /> Volver al Inicio
+        </Link>
+        
+        <div className="bg-gradient-to-br from-[#0a1526] to-[#040b14] border border-white/10 rounded-3xl p-8 md:p-16 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#8a2be2]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-8 relative z-10">{t.terms.title}</h1>
+          
+          <div className="space-y-6 text-white/70 leading-relaxed font-light relative z-10">
+            <p>{t.terms.content1}</p>
+            <p>{t.terms.content2}</p>
+            {/* Add more paragraphs as needed */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
+  return (
+    <main className="relative flex flex-col">
+      <Hero />
+      <RepresentacionBinacional />
+      <EnfoqueCentral />
+      <Servicios />
+      <ModeloDeNegocio />
+      <Contacto />
+    </main>
+  );
+};
+
 export default function App() {
   const [isPortalOpen, setIsPortalOpen] = useState(false);
 
@@ -961,14 +1055,11 @@ export default function App() {
       <Navbar onOpenPortal={() => setIsPortalOpen(true)} />
       <PortalModal isOpen={isPortalOpen} onClose={() => setIsPortalOpen(false)} />
       
-      <main className="relative flex flex-col">
-        <Hero />
-        <RepresentacionBinacional />
-        <EnfoqueCentral />
-        <Servicios />
-        <ModeloDeNegocio />
-        <Contacto />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfUse />} />
+      </Routes>
 
       <Footer />
     </div>
