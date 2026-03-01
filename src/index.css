@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Mercado';
+  src: url('/mercado.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Mercado", "Libre Baskerville", serif;
+  
+  --color-brand-green: #22819A; /* Dark Teal */
+  --color-brand-lime: #90C2E7; /* Light Blue */
+  --color-brand-cream: #FEF7F8; /* Off White/Pinkish */
+  --color-brand-pink: #CDD4DD; /* Light Gray/Blue */
+  --color-brand-blue: #90C2E7; /* Reusing Light Blue for consistency */
+  --color-brand-black: #0A0A0A; /* Deep Black for contrast */
+}
+
+@layer base {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-black text-white font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .hover-underline-animation {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+  }
+  .animate-gradient-xy {
+    animation: gradient-xy 15s ease infinite;
+  }
+}
+
+@keyframes gradient-xy {
+  0%, 100% {
+    background-size: 400% 400%;
+    background-position: 0% 0%;
+  }
+  50% {
+    background-size: 400% 400%;
+    background-position: 100% 100%;
+  }
+}
